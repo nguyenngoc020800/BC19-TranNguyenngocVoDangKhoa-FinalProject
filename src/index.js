@@ -6,6 +6,8 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { BrowserRouter } from "react-router-dom";
 import "antd/dist/antd.min.css";
+// import axiosClient from "./apis/axiosClient";
+import axios from "axios";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,3 +22,8 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+const demoAPI = async () => {
+  const data = await axios.get("http://airbnb.cybersoft.edu.vn/api/locations");
+  console.log(data);
+};
+demoAPI();
