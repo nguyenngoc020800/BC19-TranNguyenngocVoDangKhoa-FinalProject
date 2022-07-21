@@ -9,6 +9,7 @@ const HotelShowing = () => {
         <Hotel/>
         <Hotel/>
         <Hotel/>
+        <Hotel/>
     </div>
   )
 }
