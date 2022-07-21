@@ -1,7 +1,7 @@
 import React from "react";
 
 const HomeSlice = () => {
-  return <div>HomeSlice</div>;
+  return <div>HomeSlice khoa</div>;
 };
 
-// export default HomeSlice
+export default HomeSlice
