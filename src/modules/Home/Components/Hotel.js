@@ -2,8 +2,8 @@ import React from 'react'
 
 const Hotel = () => {
     return (
-        <div className="container-fluid col">
-            <div className="card" style={{ width: '18rem' }}>
+        <div className="container-fluid col rounded hotel">
+            <div className="card" >
                 <img className="card-img-top" src="https://picsum.photos/seed/picsum/200/300" alt="Card image cap" />
                 <div className="card-body">
                     <h5 className="card-title">Card title</h5>
