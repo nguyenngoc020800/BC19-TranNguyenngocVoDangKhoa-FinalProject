@@ -1,5 +1,7 @@
-import { configureStore } from "@reduxjs/toolkit";
+import React from "react";
 
-const store = configureStore({
-  reducer: {},
-});
+const Footer = () => {
+  return <div>Footer</div>;
+};
+
+export default Footer;
