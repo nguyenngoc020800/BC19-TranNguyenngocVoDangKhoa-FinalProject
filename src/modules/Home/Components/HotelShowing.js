@@ -3,8 +3,11 @@ import Hotel from './Hotel'
 
 const HotelShowing = () => {
   return (
-    <div>
-        <h1>Hotel showing</h1>
+    <div className="bg-primary row">
+        
+        <Hotel/>
+        <Hotel/>
+        <Hotel/>
         <Hotel/>
     </div>
   )

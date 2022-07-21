@@ -1,6 +1,6 @@
 import React from 'react'
-import Filter from '../Components/Filter';
-import HotelShowing from '../Components/HotelShowing'
+import Filter from '../components/Filter'
+import HotelShowing from '../components/HotelShowing'
 const Home = () => {
   return (
     <div>
