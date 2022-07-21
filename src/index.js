@@ -22,8 +22,8 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-// const demoAPI = async () => {
-//   const data = await axiosClient.get("locations");
-//   console.log(data);
-// };
-// demoAPI();
+const demoAPI = async () => {
+  const data = await axiosClient.get("locations");
+  console.log(data);
+};
+demoAPI();
