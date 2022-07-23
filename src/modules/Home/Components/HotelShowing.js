@@ -3,8 +3,15 @@ import Hotel from './Hotel'
 
 const HotelShowing = () => {
   return (
-    <div className="bg-primary row">
+    <div className="row hotel-list">
         
+        <Hotel/>
+        <Hotel/>
+        <Hotel/>
+        <Hotel/>
+        <Hotel/>
+        <Hotel/>
+        <Hotel/>
         <Hotel/>
         <Hotel/>
         <Hotel/>
