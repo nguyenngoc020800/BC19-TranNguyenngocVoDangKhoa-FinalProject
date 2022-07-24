@@ -1,8 +1,12 @@
 import React from 'react'
 
-const HotelSlide = () => {
+const HotelSlide = ({ image }) => {
+  
+  
   return (
-    <div>HotelSlide</div>
+    <>
+      <img className="card-img-top hotel-img" src={image} alt="demo" />
+    </>
   )
 }
 

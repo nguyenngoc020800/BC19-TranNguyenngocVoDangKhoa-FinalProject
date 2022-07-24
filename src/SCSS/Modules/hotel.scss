@@ -1,27 +1,71 @@
 @import '../Base/all.scss';
 
 
-.card {
+.hotel {
     width: 100%;
     height: 400px;
     border-radius: $hotel-radius;
     background-color: $hotel-background;
+    
     cursor: pointer;
+    &:hover .arrow {
+        
+        display: block !important;
+    }
+    
+
 }
 
 .hotel .hotel-header {
+    
+    
     width: 100%;
     height: 70%;
+    position: relative;
     .hotel-img {
         width: 100%;
         height: 100%;
         border-radius: $hotel-radius;
+    }
+    .arrow {
+        
+        overflow: visible !important;
+        
+        
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.5rem;
+        margin: 15px;
+        
+        border-radius: 50%;
+        display: none;
+        transition-duration: 500ms;
+        &:hover {
+            
+            
+            background-color: $hotel-background;
+            
+            top: 50%;
+            transform: translateY(-50%) scale(2);
+
+        }
+        &:nth-last-child(1) {
+            position: absolute;
+            right: 0;
+        }
+        &:nth-last-child(2) {
+            position: absolute;
+            left: 0;
+        }
+    
     }
 }
 
 
 
 .hotel .hotel-body {
+    
     padding: 0 !important;
     .hotel-title {
         padding: 0 !important;
