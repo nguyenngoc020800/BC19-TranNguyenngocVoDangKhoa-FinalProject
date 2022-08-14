@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getLocationLists } from "../../../Redux/Home/locationSlice";
+import { getLocationLists } from "../../../Redux/Home/LocationSlice";
 // import { Tabs } from "antd";
 import SearchBox from "../../../components/SearchBox";
 import { BsGlobe } from "react-icons/bs";
