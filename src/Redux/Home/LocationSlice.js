@@ -1,9 +1,33 @@
-import React from 'react'
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { getLocationList } from "../../apis/homeAPI";
 
-const LocationSlice = () => {
-  return (
-    <div>LocationSlice</div>
-  )
-}
+const initialState = {
+  data: [],
+  isLoading: false,
+  error: null,
+};
 
-export default LocationSlice
+export const getLocationLists = createAsyncThunk(
+  "location/getlocationlist",
+  async () => {
+    return await getLocationList();
+  }
+);
+
+const locationSlice = createSlice({
+  name: "location",
+  initialState,
+  extraReducers: {
+    [getLocationLists.pending]: (state) => {
+      return { ...state, isLoading: true };
+    },
+    [getLocationLists.fulfilled]: (state, action) => {
+      return { ...state, data: action.payload, isLoading: false };
+    },
+    [getLocationLists.rejected]: (state, action) => {
+      return { ...state, error: action.error, isLoading: false };
+    },
+  },
+});
+
+export default locationSlice.reducer;

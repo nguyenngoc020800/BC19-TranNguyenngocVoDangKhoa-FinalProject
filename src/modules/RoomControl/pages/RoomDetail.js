@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
+import { useParams } from "react-router-dom";
 
 const RoomDetail = () => {
-  return (
-    <div>RoomDetail</div>
-  )
-}
+  const { roomId } = useParams("");
+  return <div>{roomId}</div>;
+};
 
-export default RoomDetail
+export default RoomDetail;

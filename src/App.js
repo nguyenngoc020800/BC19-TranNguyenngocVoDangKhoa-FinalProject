@@ -6,7 +6,7 @@ import RoomDetail from "./modules/RoomControl/pages/RoomDetail";
 import MainLayOut from "./layout/MainLayOut";
 function App() {
   return (
-    <>
+    <div className="container-fluid w1k2px">
       <Routes>
         <Route path="/" element={<MainLayOut />}>
           <Route index element={<Home />} />
@@ -14,7 +14,7 @@ function App() {
           <Route path="/roomDetails/:roomId" element={<RoomDetail />} />
         </Route>
       </Routes>
-    </>
+    </div>
   );
 }
 
