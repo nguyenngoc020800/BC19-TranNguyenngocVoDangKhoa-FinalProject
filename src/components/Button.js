@@ -1,5 +1,4 @@
 import React from 'react'
-import { BsStarFill } from "react-icons/bs";
 import { BsArrowLeftShort, BsArrowRightShort } from 'react-icons/bs'
 
 const Button = () => {

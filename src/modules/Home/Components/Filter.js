@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import data from '../../../constant/staticData';
 import { BsArrowLeftShort, BsArrowRightShort } from 'react-icons/bs'
 import { AiOutlineFilter } from 'react-icons/ai'
 import { IconContext } from 'react-icons/lib';
-
+import FilterModal from './FilterModal'
 const Filter = () => {
   let filter = data.filters;
-  console.log(data);
-
+  const [isOpen,setOpen] = useState(false)
+  console.log(useState(false))
   return (
     <div className="nav-filter container-fluid row">
       <div className="icon-places col-11 row">
@@ -30,11 +30,12 @@ const Filter = () => {
 
 
       <div className="filter-button col-1 p-0">
-        <button className="filter">
+        <button className="filter" onClick={()=>setOpen(true)}>
           <AiOutlineFilter />
           <span className="">Filter</span>
         </button>
       </div>
+      {isOpen && <FilterModal setOpen={setOpen}/>}
     </div>
   )
 }
