@@ -6,7 +6,8 @@ import { Provider } from "react-redux";
 import store from "./store";
 import { BrowserRouter } from "react-router-dom";
 import "antd/dist/antd.min.css";
-import axiosClient from "./apis/axiosClient";
+// import axiosClient from "./apis/axiosClient";
+import "./SCSS/main.scss";
 // import axios from "axios";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -22,3 +23,10 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+// reportWebVitals();
+// const demoAPI = async () => {
+//   const data = await axiosClient.get("locations");
+//   console.log(data);
+// };
+// demoAPI();

@@ -1,0 +1,9 @@
+@import 'Base/all.scss';
+@import 'Pages/all.scss';
+@import './Modules/all.scss';
+@import './Components/all.scss';
+
+* {
+    background-color: $airbnb-theme;
+    font-size: $font-size;
+}

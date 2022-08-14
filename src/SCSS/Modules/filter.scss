@@ -1,0 +1,85 @@
+@import '../Base/all.scss';
+
+
+.nav-filter {
+    background-color: $airbnb-theme;
+    margin-bottom: 1.5rem;
+    height: 4rem;
+    .icon-places {
+        height: 100%;
+        padding: 0 !important;
+       .arrow {
+        overflow: visible !important;
+        opacity: 1;
+        cursor: pointer;
+        position: absolute;
+        z-index: 999;
+        font-size: 1.5rem;
+        margin: 15px 5px;
+        
+        background-color: $bottom-line;
+        border-radius: 50%;
+        transition: 1000ms;
+        &:nth-last-child(1) {
+            position: absolute;
+            right: 0;
+        }
+        &:hover {
+            box-shadow: $bottom-line 0.5;
+            transform: scale(1.25);
+        }
+       }
+        .place {
+            height: 100%;
+            width: 100%;
+            position: relative;
+            border: black 5px;
+            
+            text-align: center;
+            top: 50%;
+            transform: translateY(-50%);
+            &:after{
+                display:block;
+                content: '';
+                border-bottom: solid 3px $bottom-line;
+                position: relative;
+                top: 2rem;
+                transform: scaleX(0);  
+                transition: transform 250ms ease-in-out;
+            }
+            &:hover::after{
+                transform: scaleX(1); 
+                opacity: 1;
+            }
+            &:hover p {
+                opacity: 1;
+            }
+            
+            p {
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+                opacity: 0.5;
+                
+               
+            }
+            
+        }
+    }
+    .filter-button {
+        height: 100%;
+        border: none;
+        .filter {
+            height: 100%;
+            position: relative;
+            cursor: pointer;
+            transform: translate(-50%);
+            left: 50%;
+            border: 2px solid $bottom-line;
+            border-radius: 15px;
+            
+            
+        }
+    }
+}
+
