@@ -2,7 +2,10 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getLocationLists } from "../../../Redux/Home/LocationSlice";
+import {
+  getLocationLists,
+  getRoomById,
+} from "../../../Redux/Home/locationSlice";
 // import { Tabs } from "antd";
 import SearchBox from "../../../components/SearchBox";
 import { BsGlobe } from "react-icons/bs";
@@ -134,39 +137,45 @@ const NavFilter = styled.div`
     &:hover {
       background-color: #ebebeb;
       cursor: pointer;
+      button {
+        background-color: #dc3545;
+      }
     }
     transition: all ease-in 0.1s;
   }
 `;
 
-const filterInfor = {
-  location: null,
-  ngayden: null,
-  ngaydi: null,
-  songuoi: 0,
-};
-// hàm menu thông tin đăng kí đăng nhập
-const handleChange = (value) => {
-  console.log(`selected ${value}`);
-};
-// hàm viết cho dữ liệu sự kiện chọn ngày đi
-const onChange = (date, dateString) => {
-  filterInfor.ngayden = dateString;
-  console.log(filterInfor);
-};
-// hàm viết cho dữ liệu sự kiện chọn ngày về
-
-const onChange2 = (date, dateString) => {
-  filterInfor.ngaydi = dateString;
-  console.log(filterInfor);
-};
-const onChange3 = (date, dateString) => {
-  console.log(dateString);
-};
-const onChange4 = (date, dateString) => {
-  console.log(dateString);
-};
+// // hàm menu thông tin đăng kí đăng nhập
+// const handleChange = (value) => {
+//   console.log(`selected ${value}`);
+// };
 const Nav = () => {
+  const [filterInfor, setFilter] = useState({
+    location: null,
+    ngayden: null,
+    ngaydi: null,
+    songuoi: 0,
+    id: "",
+  });
+  // hàm viết cho dữ liệu sự kiện chọn ngày đi
+  const onChange = (date, dateString) => {
+    setFilter((state) => {
+      return { ...state, ngayden: dateString };
+    });
+  };
+  // hàm viết cho dữ liệu sự kiện chọn ngày về
+
+  const onChange2 = (date, dateString) => {
+    setFilter((state) => {
+      return { ...state, ngaydi: dateString };
+    });
+  };
+  const onChange3 = (date, dateString) => {
+    console.log(dateString);
+  };
+  const onChange4 = (date, dateString) => {
+    console.log(dateString);
+  };
   // sử dụng cho tab và tabpanel
   const [value, setValue] = React.useState(0);
 
@@ -175,9 +184,10 @@ const Nav = () => {
   };
   // sử dụng cho tab và tabpanel
 
-  const { data } = useSelector((state) => state.location);
+  const { data, room } = useSelector((state) => state.location);
   const dispatch = useDispatch();
   console.log(data);
+  console.log(room);
   useEffect(() => {
     //call api các địa danh
     dispatch(getLocationLists());
@@ -189,16 +199,31 @@ const Nav = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (path) => {
+    navigate(path);
     setAnchorEl(null);
   };
   const handleSearch = () => {
     console.log(filterInfor);
+    // setFilter((state) => {
+    //   return { ...state, id: id };
+    // });
   };
   const onChangeLocation = (value) => {
-    filterInfor.location = value;
+    console.log(value);
+    setFilter((state) => {
+      return { ...state, location: value };
+    });
   };
-
+  const onGetID = (ID) => {
+    setFilter((state) => {
+      return { ...state, id: ID };
+    });
+  };
+  useEffect(() => {
+    dispatch(getRoomById(filterInfor.id));
+    // console.log(filterInfor.id);
+  }, [filterInfor.id]);
   return (
     <NavContent>
       <div className="row">
@@ -314,13 +339,21 @@ const Nav = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>
+              <MenuItem
+                onClick={() => {
+                  handleClose("/auth/login");
+                }}
+              >
                 <button className="w-100 btn btn-outline-none m-none">
                   {" "}
                   Đăng nhập
                 </button>
               </MenuItem>
-              <MenuItem onClick={handleClose}>
+              <MenuItem
+                onClick={() => {
+                  handleClose("/auth/register");
+                }}
+              >
                 <button className="w-100 btn btn-outline-none m-none">
                   Đăng kí
                 </button>
@@ -342,6 +375,7 @@ const Nav = () => {
               listActive={data}
               placeholder="chọn điểm đến"
               sendLocationfromInput={onChangeLocation}
+              sendID={onGetID}
             />
             <DatePicker onChange={onChange} placeholder="ngày đến" />
             <DatePicker onChange={onChange2} placeholder="ngày đi" />
@@ -351,7 +385,9 @@ const Nav = () => {
                 placeholder="số người"
                 onChange={(e) => {
                   console.log(e.target);
-                  filterInfor.songuoi = e.target.value;
+                  setFilter((state) => {
+                    return { ...state, songuoi: e.target.value };
+                  });
                 }}
               />
               {filterInfor.location &&
@@ -359,7 +395,7 @@ const Nav = () => {
               filterInfor.ngaydi &&
               filterInfor.songuoi ? (
                 <button className="btn btn-danger" onClick={handleSearch}>
-                  <i class="fa fa-search"></i>
+                  <i className="fa fa-search"></i>
                 </button>
               ) : (
                 <button
@@ -367,7 +403,7 @@ const Nav = () => {
                   onClick={handleSearch}
                   disabled
                 >
-                  <i class="fa fa-search"></i>
+                  <i className="fa fa-search"></i>
                 </button>
               )}
             </div>
@@ -382,7 +418,7 @@ const Nav = () => {
               <input type="text" placeholder="số người" />
 
               <button className="btn btn-danger">
-                <i class="fa fa-search"></i>
+                <i className="fa fa-search"></i>
               </button>
             </div>
           </NavFilter>

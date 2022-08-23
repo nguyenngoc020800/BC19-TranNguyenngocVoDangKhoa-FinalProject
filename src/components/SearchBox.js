@@ -60,12 +60,12 @@ const Search = styled.div`
 
 const SearchBox = (props) => {
   const inputRef = useRef();
-  const { listActive, placeholder,sendLocationfromInput } = props;
+  const { listActive, placeholder, sendLocationfromInput, sendID } = props;
   const [search, setSearch] = useState("");
   const [listFilter, setListFilter] = useState(null);
   const handleChangeSearch = (e) => {
     const keyword = e.target.value;
-    console.log(keyword);
+    // console.log(keyword);
     if (keyword !== "") {
       const results = listActive.filter((item) => {
         return (
@@ -81,19 +81,19 @@ const SearchBox = (props) => {
       }
     } else {
       setListFilter(null);
+      sendID("");
     }
 
     setSearch(keyword);
   };
   const handleClickButton = (e) => {
     inputRef.current.value = e.target.innerHTML;
-
     setSearch(inputRef.current.value);
     setListFilter(null);
-    sendLocationfromInput(inputRef.current.value)
+    sendLocationfromInput(inputRef.current.value);
+    sendID(e.target.dataset.id);
   };
   // console.log(search, listFilter);
-
   if (listFilter) {
     return (
       <Search>
@@ -112,6 +112,7 @@ const SearchBox = (props) => {
                 key={index}
                 className="btn btn-light w-100"
                 onClick={handleClickButton}
+                data-id={item._id}
               >
                 {item.name},{item.province}
               </button>
