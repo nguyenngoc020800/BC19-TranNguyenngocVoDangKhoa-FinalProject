@@ -185,6 +185,7 @@ const Nav = () => {
   // sử dụng cho tab và tabpanel
 
   const { data, room } = useSelector((state) => state.location);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   console.log(data);
   console.log(room);
@@ -318,55 +319,93 @@ const Nav = () => {
             Item Three
           </TabPanel> */}
         </div>
-        <div className="col-2 d-flex align-items-center user-infor">
-          <button className="btn btn-outline-none">Trở thành chủ nhà</button>
-          <button className="btn btn-outline-none">
-            <BsGlobe />
-          </button>
-          <div style={{ position: "relative" }}>
-            <Button
-              aria-controls="simple-menu"
-              aria-haspopup="true"
-              onClick={handleClick}
-            >
-              {<GiHamburgerMenu />}
-              {<FaUserCircle />}
-            </Button>
-            <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem
-                onClick={() => {
-                  handleClose("/auth/login");
-                }}
+        {!user ? (
+          <div className="col-2 d-flex align-items-center user-infor">
+            <button className="btn btn-outline-none">Trở thành chủ nhà</button>
+            <button className="btn btn-outline-none">
+              <BsGlobe />
+            </button>
+            <div style={{ position: "relative" }}>
+              <Button
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={handleClick}
               >
-                <button className="w-100 btn btn-outline-none m-none">
-                  {" "}
-                  Đăng nhập
-                </button>
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  handleClose("/auth/register");
-                }}
+                {<GiHamburgerMenu />}
+                {<FaUserCircle />}
+              </Button>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
               >
-                <button className="w-100 btn btn-outline-none m-none">
-                  Đăng kí
-                </button>
-              </MenuItem>
-              <MenuItem
-                onClick={handleClose}
-                style={{ justifyContent: "center" }}
-              >
-                My account
-              </MenuItem>
-            </Menu>
+                <MenuItem
+                  onClick={() => {
+                    handleClose("/auth/login");
+                  }}
+                >
+                  <button className="w-100 btn btn-outline-none m-none">
+                    {" "}
+                    Đăng nhập
+                  </button>
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleClose("/auth/register");
+                  }}
+                >
+                  <button className="w-100 btn btn-outline-none m-none">
+                    Đăng kí
+                  </button>
+                </MenuItem>
+              </Menu>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="col-2 d-flex align-items-center user-infor">
+            <button className="btn btn-outline-none">Trở thành chủ nhà</button>
+            <button className="btn btn-outline-none">
+              <BsGlobe />
+            </button>
+            <div style={{ position: "relative" }}>
+              <Button
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={handleClick}
+              >
+                {user?.user.name}
+              </Button>
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem
+                  onClick={() => {
+                    dispatch({ type: "auth/logOut" });
+                    alert("bạn đã đăng xuất");
+                    setAnchorEl(null);
+                  }}
+                >
+                  <button className="w-100 btn btn-outline-none m-none">
+                    {" "}
+                    Đăng xuất
+                  </button>
+                </MenuItem>
+                <MenuItem
+                  onClick={handleClose}
+                  style={{ justifyContent: "center" }}
+                >
+                  My account
+                </MenuItem>
+              </Menu>
+            </div>
+          </div>
+        )}
       </div>
       <div className="d-flex justify-content-center">
         <TabPanel value={value} index={0}>

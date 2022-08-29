@@ -2,7 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
-
+import { useSelector, useDispatch } from "react-redux";
+import { loginPage } from "../../../Redux/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 const LoginContent = styled.div`
   width: 400px;
   position: relative;
@@ -14,6 +16,10 @@ const LoginContent = styled.div`
 `;
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { user, error } = useSelector((state) => state.auth);
+  console.log("user", user);
   const {
     register,
     handleSubmit,
@@ -27,12 +33,18 @@ const Login = () => {
   });
   const onSubmit = (value) => {
     console.log("submit thành công", value);
+    dispatch(loginPage(value));
   };
   const onError = (value) => {
     console.log("submit không thành công", value);
   };
+  if (user && !error) {
+    navigate("/");
+    return;
+  }
   return (
     <LoginContent>
+      {error && <p className="text-danger">{error}</p>}
       <h2 className="text-center">Đăng Nhập</h2>
       <form action="" onSubmit={handleSubmit(onSubmit, onError)}>
         <TextField
